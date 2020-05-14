@@ -85,13 +85,13 @@ To create a RemoteApp group with PowerShell:
 5. (Optional) Run the following cmdlet to publish a new RemoteApp program to the application group created in step 1.
 
    ```powershell
-   New-AzWvdApplication -GroupName <appgroupname> -Name <remoteappname> -ResourceGroupName <resourcegroupname> -Filepath <filepath> -IconPath <iconpath> -IconIndex <iconindex> -CommandLineSetting <DoNotAllow|Allow|Require> 
+   New-AzWvdApplication -GroupName <appgroupname> -Name <remoteappname> -ResourceGroupName <resourcegroupname> -Filepath <filepath> -IconPath <iconpath> -IconIndex <iconindex> -CommandLineSetting <DoNotAllow|Allow|Require> -ShowInPortal
    ```
 
 6. To verify that the app was published, run the following cmdlet.
 
    ```powershell
-   Get-AzWvdApplication -GroupName <appgroupname> -ResourceGroupName <resourcegroupname>
+   Get-AzWvdApplication -GroupName <appgroupname> -ResourceGroupName <resourcegroupname> | fl
    ```
 
 7. Repeat steps 1–5 for each application that you want to publish for this app group.
@@ -99,6 +99,12 @@ To create a RemoteApp group with PowerShell:
 
    ```powershell
    New-AzRoleAssignment -SignInName <userupn> -RoleDefinitionName "Desktop Virtualization User" -ResourceName <appgroupname> -ResourceGroupName <resourcegroupname> -ResourceType 'Microsoft.DesktopVirtualization/applicationGroups'
+   ```
+   
+9. To delete an application group, run the following cmdlet:
+
+   ```powershell
+   Remove-AzWvdApplicationGroup -Name <appgroupname> -ResourceGroupName <resourcegroupname> -PassThru
    ```
 
 ## Next steps
